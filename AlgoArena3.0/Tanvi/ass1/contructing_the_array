@@ -1,0 +1,46 @@
+// Source: https://usaco.guide/general/io
+
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        set<array<int,3>> s;
+        int ar[n+1]={},j=1;
+        s.insert({-1*n,1,n});
+       
+        while(s.size()>=1){
+            auto it=s.begin();
+            // auto pit = prev(it);
+            // while((*it)[0]==(*(prev(it)))[0]){
+            //     it=prev(it);
+            //     // auto pit = prev(it);
+            // }
+            // if((*it)[0]==(*(it-1))[0]) it--;
+            if((-1*(*it)[1]+(*it)[2]+1)%2!=0) {
+                ar[((*it)[1]+(*it)[2])/2]=j++;
+                if((*it)[1]!=(*it)[2]){
+                 s.insert({((-1*(*it)[1]+(*it)[2])/2)*-1,(*it)[1],((*it)[1]+(*it)[2])/2-1});
+                 s.insert({((-1*(*it)[1]+(*it)[2])/2)*-1,((*it)[1]+(*it)[2])/2+1,(*it)[2]});}
+            }    
+            else{
+                ar[((*it)[1]+(*it)[2]-1)/2]=j++;
+                if((*it)[1]!=(*it)[2]){
+                 if((-1*(*it)[1]+(*it)[2]+1)/2-1!=0) s.insert({((-1*(*it)[1]+(*it)[2]+1)/2-1)*-1,(*it)[1],((*it)[1]+(*it)[2]-1)/2-1});
+                 s.insert({((-1*(*it)[1]+(*it)[2]+1)/2)*-1,((*it)[1]+(*it)[2]-1)/2+1,(*it)[2]});}
+            } 
+            
+            s.erase(it);
+           
+        }
+        for(int i=1; i<=n; i++) cout<<ar[i]<<" ";
+ cout<<endl;
+    }
+    
+
+}

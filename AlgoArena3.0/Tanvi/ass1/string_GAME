@@ -1,0 +1,53 @@
+
+
+#include <bits/stdc++.h>
+#define ll long long
+ll mod=1000000007;
+using namespace std;
+
+int main() {
+    string s,fin;
+    cin>>s>>fin;
+    ll ord = s.length();
+    ll want= fin.length();
+    ll ar[ord];
+    for(int i=1; i<=ord; i++){
+        ll k;
+        cin>>k;
+        ar[k-1]=i;
+    }
+    ll st=0, end=ord;
+    ll kh=-1;
+    ll i,j=0;
+    while(st<end){
+        kh=-1;j=0;
+        ll mid=(st+end+1)/2;
+        for( i=0; i<want; i++){
+           while(  j<ord){
+                if(fin[i]==s[j]){
+                    if(ar[j]>mid){
+                        kh=i;
+                        j++;
+                        break;
+                    }
+                    else{
+                        j++;
+                        continue;
+                    }
+                }
+                j++;
+           }
+        }
+        if(kh==want-1){
+            st=mid;
+        }
+        else{
+            end=mid-1;
+        }
+
+
+    }
+
+    cout<<end;
+    
+}
